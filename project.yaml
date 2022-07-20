@@ -1,5 +1,5 @@
 specVersion: 1.0.0
-name: subquery-quickstart
+name: subquery-testing
 version: 1.0.0
 runner:
   node:
@@ -9,7 +9,7 @@ runner:
     name: '@subql/query'
     version: '*'
 description: Project for testing the subquery implementation
-repository: 'https://github.com/subquery/subql-starter'
+repository: 'https://github.com/AtelyPham/subquery.git'
 schema:
   file: ./schema.graphql
 network:
