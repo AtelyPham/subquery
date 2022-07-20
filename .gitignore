@@ -41,6 +41,7 @@ TEST*.xml
 Thumbs.db
 
 # Applications
+.data
 *.app
 *.exe
 *.war
