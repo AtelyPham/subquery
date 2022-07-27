@@ -1,22 +1,19 @@
-import { Balance } from '@polkadot/types/interfaces'
-import { SubstrateEvent } from '@subql/types'
-import { Transfer } from '../types'
+import {
+  SubstrateExtrinsic,
+  SubstrateEvent,
+  SubstrateBlock,
+} from '@subql/types'
+import { createEvent, createExtrinsic, createBlock } from '../handlers'
+
+export async function handleBlock(block: SubstrateBlock): Promise<void> {
+  logger.debug(JSON.stringify(block))
+  await createBlock(block)
+}
 
 export async function handleEvent(event: SubstrateEvent): Promise<void> {
-  const {
-    event: {
-      data: [from, to, amount],
-    },
-  } = event
+  await createEvent(event)
+}
 
-  // Create the new transfer entity
-  const transfer = new Transfer(
-    `${event.block.block.header.number.toNumber()}-${event.idx}`
-  )
-
-  transfer.blockNumber = event.block.block.header.number.toBigInt()
-  transfer.from = from.toString()
-  transfer.to = to.toString()
-  transfer.amount = (amount as Balance).toBigInt()
-  await transfer.save()
+export async function handleCall(extrinsic: SubstrateExtrinsic): Promise<void> {
+  await createExtrinsic(extrinsic)
 }
